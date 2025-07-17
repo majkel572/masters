@@ -1,0 +1,18 @@
+Metryka,Next (C),Blazor (C),Next (F),Blazor (F)
+Liczba rozgrzewek,20,20,20,20
+Liczba testów,100,100,100,100
+Mediana FCP (ms),16.00,20.00,26.00,139.00
+Średnia FCP (ms),16.52,25.44,27.76,147.63
+Min FCP (ms),12.00,12.00,16.00,25.00
+Max FCP (ms),44.00,428.00,126.00,468.00
+OdchylenieStd FCP (ms),3.08,41.56,11.62,73.03
+Mediana LCP (ms),16.00,20.00,28.00,140.00
+Średnia LCP (ms),16.52,25.44,29.08,148.05
+Min LCP (ms),12.00,12.00,16.00,25.00
+Max LCP (ms),44.00,428.00,127.00,468.00
+OdchylenieStd LCP (ms),3.08,41.56,11.60,72.98
+Mediana TTI (ms),30.40,78.30,33.00,142.00
+Średnia TTI (ms),30.51,84.58,36.27,150.62
+Min TTI (ms),27.10,31.80,28.00,26.00
+Max TTI (ms),54.40,470.00,139.00,469.00
+OdchylenieStd TTI (ms),2.61,41.47,12.63,73.64

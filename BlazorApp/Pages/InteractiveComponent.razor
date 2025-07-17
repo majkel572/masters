@@ -1,0 +1,11 @@
+@page "/interactive-component"
+
+@* TTI (Time to Interactive) is the most important metric for interactive components, as it measures when the component is usable. *@
+
+@code {
+    int count = 0;
+}
+
+<h1>Interactive Component Test</h1>
+<button @onclick="() => count++">Clicked @count times</button>
+<p>This page displays an interactive button to measure FCP, LCP, and TTI.</p>

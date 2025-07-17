@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <BlazorWebAssemblyEnableAOT>true</BlazorWebAssemblyEnableAOT>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +15,7 @@
 
   <ItemGroup>
     <Folder Include="Layout\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
-
+	
 </Project>

@@ -1,0 +1,31 @@
+@page "/fetch-backend"
+
+@* LCP (Largest Contentful Paint) is the most important metric for backend data fetching, as it measures when the fetched content is rendered. *@
+
+@using System.Net.Http.Json
+
+@code {
+    class Post
+    {
+        public string Title { get; set; } = string.Empty;
+        public string Body { get; set; } = string.Empty;
+    }
+    Post? data;
+    protected override async Task OnInitializedAsync()
+    {
+        data = await Http.GetFromJsonAsync<Post>("https://jsonplaceholder.typicode.com/posts/1");
+    }
+    [Inject] public HttpClient Http { get; set; } = default!;
+}
+
+<h1>Fetch Backend Test</h1>
+@if (data != null)
+{
+    <h2>@data.Title</h2>
+    <p>@data.Body</p>
+}
+else
+{
+    <p>Loading...</p>
+}
+<p>This page fetches data from a backend to measure FCP, LCP, and TTI.</p>

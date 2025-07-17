@@ -1,0 +1,26 @@
+@page "/form-validation"
+
+@* TTI (Time to Interactive) is the most important metric for forms, as it measures when the form is usable and validation works. *@
+
+@code {
+    string value = string.Empty;
+    string error = string.Empty;
+    void HandleSubmit()
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            error = "Field is required";
+        else
+            error = string.Empty;
+    }
+}
+
+<h1>Form Validation Test</h1>
+<EditForm OnValidSubmit="HandleSubmit">
+    <InputText @bind-Value="value" placeholder="Type something..." />
+    <button type="submit">Submit</button>
+</EditForm>
+@if (!string.IsNullOrEmpty(error))
+{
+    <div style="color: red">@error</div>
+}
+<p>This page displays a form with validation to measure FCP, LCP, and TTI.</p>

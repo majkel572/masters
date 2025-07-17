@@ -1,0 +1,26 @@
+@page "/complex-list"
+
+@* LCP (Largest Contentful Paint) is the most important metric for a complex list, as it measures when the largest visible element is rendered. *@
+
+@code {
+    class Item
+    {
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+    }
+    List<Item> items = Enumerable.Range(1, 1000)
+    .Select(i => new Item { Title = $"Item {i}", Description = $"Description for item {i}" })
+    .ToList();
+}
+
+<h1>Complex List Test</h1>
+<ul>
+    @foreach (var item in items)
+    {
+        <li style="margin-bottom: 12px;">
+            <strong>@item.Title</strong>
+            <div>@item.Description</div>
+        </li>
+    }
+</ul>
+<p>This page displays a complex list to measure FCP, LCP, and TTI.</p>
