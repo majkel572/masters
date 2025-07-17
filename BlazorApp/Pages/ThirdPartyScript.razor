@@ -2,25 +2,43 @@
 @* TTI (Time to Interactive) is the most important metric for third-party scripts, as it measures when the page is usable after the script loads. *@
 @inject IJSRuntime JS
 
-<h1>Third-party Script Test</h1>
+<h1>Facebook Post Embed</h1>
 
-<blockquote class="twitter-tweet">
-    <a href="https://twitter.com/Twitter/status/1456342957031704579">Loading Twitter Widget...</a>
-</blockquote>
+<div class="fb-post"
+     data-href="https://www.facebook.com/zuck/posts/10102577175875681"
+     data-width="500">
+</div>
 
-<p>This page loads a third-party script to measure FCP, LCP, and TTI.</p>
-
+<p>This page embeds a Facebook post using the FB SDK.</p>
 @code {
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            // Dynamically load the Twitter widget script
+            // Inject and load the Facebook SDK script dynamically
             await JS.InvokeVoidAsync("eval", @"
-                var s = document.createElement('script');
-                s.src = 'https://platform.twitter.com/widgets.js';
-                s.async = true;
-                document.body.appendChild(s);
+                (function() {
+                    var existingScript = document.getElementById('facebook-jssdk');
+                    if (existingScript) {
+                        // Already loaded - just parse the XFBML
+                        if (window.FB && window.FB.XFBML) {
+                            window.FB.XFBML.parse();
+                        }
+                        return;
+                    }
+                    var script = document.createElement('script');
+                    script.id = 'facebook-jssdk';
+                    script.async = true;
+                    script.defer = true;
+                    script.crossOrigin = 'anonymous';
+                    script.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0';
+                    script.onload = function() {
+                        if (window.FB && window.FB.XFBML) {
+                            window.FB.XFBML.parse();
+                        }
+                    };
+                    document.body.appendChild(script);
+                })();
             ");
         }
     }

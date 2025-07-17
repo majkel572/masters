@@ -1,25 +1,45 @@
-// TTI (Time to Interactive) is the most important metric for third-party scripts, as it measures when the page is usable after the script loads.
 "use client";
 import { useEffect } from "react";
-export default function ThirdPartyScriptPage() {
+
+declare global {
+  interface Window {
+    FB?: any;
+  }
+}
+
+export default function FacebookEmbedPage() {
   useEffect(() => {
+    // Create the Facebook SDK script
     const script = document.createElement("script");
-    script.src = "https://platform.twitter.com/widgets.js";
     script.async = true;
+    script.defer = true;
+    script.crossOrigin = "anonymous";
+    script.src =
+      "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0";
+
     document.body.appendChild(script);
+
+    script.onload = () => {
+      // Re-parse Facebook plugin elements once script is loaded
+      if (window.FB) {
+        window.FB.XFBML.parse();
+      }
+    };
+
     return () => {
       document.body.removeChild(script);
     };
   }, []);
+
   return (
     <main style={{ padding: 32 }}>
-      <h1>Third-party Script Test</h1>
-      <blockquote className="twitter-tweet">
-        <a href="https://twitter.com/Twitter/status/1456342957031704579">
-          Loading Twitter Widget...
-        </a>
-      </blockquote>
-      <p>This page loads a third-party script to measure FCP, LCP, and TTI.</p>
+      <h1>Facebook Post Embed</h1>
+      <div
+        className="fb-post"
+        data-href="https://www.facebook.com/zuck/posts/10102577175875681"
+        data-width="500"
+      ></div>
+      <p>This page embeds a Facebook post using the FB SDK.</p>
     </main>
   );
 }
